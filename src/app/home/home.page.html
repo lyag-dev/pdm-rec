@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Catalogo.
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,7 +14,29 @@
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <button (click)="listarCriaturas()" type="button">Listar Criaturas.</button>
+    <div *ngIf="mostrar_lista_criaturas == true">
+      <div *ngFor="let Criaturas of listaCriaturas">
+        ID: {{ Criaturas.id }},
+        Nome: {{ Criaturas.nome }},
+        Tipo: {{ Criaturas.tipo }},
+        Nível de perigo: {{ Criaturas.nivelPerigo }},
+        Descrição: {{ Criaturas.descricao}}.
+      </div>
+    </div>
+    <br>
+    <button (click)="listarCatalogo()" type="button">Criaturas catalogadas.</button>
+    <div *ngIf="mostrar_lista_catalogo == true">
+      Catalogadas:
+      <div *ngFor="let Criaturas of filtrarCriaturas(true)">
+        ID: {{ Criaturas.id }},
+        Nome: {{ Criaturas.nome }},
+      </div>
+      Não catalogadas:
+      <div *ngFor="let Criaturas of filtrarCriaturas(false)">
+        ID: {{ Criaturas.id }},
+        Nome: {{ Criaturas.nome }},
+      </div>
+    </div>
+</div>
 </ion-content>
