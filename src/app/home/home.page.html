@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Catalogo.
+      Catálogo de Criaturas.
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,34 +9,113 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Gerenciar Criaturas</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <button (click)="listarCriaturas()" type="button">Listar Criaturas.</button>
+    <ion-button expand="block" color="success" (click)="toggleFormulario()">
+      {{ mostrar_formulario ? 'Ocultar' : 'Adicionar Criatura' }}
+    </ion-button>
+    <div *ngIf="mostrar_formulario" class="formulario-container">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Formulário - Nova Criatura</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form [formGroup]="formulario" (ngSubmit)="adicionarCriatura()">
+            <ion-item>
+              <ion-label position="floating">Nome da Criatura:</ion-label>
+              <ion-input formControlName="nome" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched" class="error-message">
+              Nome deve ter no mínimo 3 caracteres.
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Tipo:</ion-label>
+              <ion-input formControlName="tipo" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="formulario.get('tipo')?.invalid && formulario.get('tipo')?.touched" class="error-message">
+              Tipo deve ter no mínimo 3 caracteres.
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Nível de Perigo (0-10):</ion-label>
+              <ion-input formControlName="nivelPerigo" type="number" min="0" max="10"></ion-input>
+            </ion-item>
+            <div *ngIf="formulario.get('nivelPerigo')?.invalid && formulario.get('nivelPerigo')?.touched" class="error-message">
+              Nível deve estar entre 0 e 10.
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Descrição:</ion-label>
+              <ion-input formControlName="descricao" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="formulario.get('descricao')?.invalid && formulario.get('descricao')?.touched" class="error-message">
+              Descrição deve ter no mínimo 10 caracteres.
+            </div>
+
+            <ion-item>
+              <ion-label>Catalogada?</ion-label>
+              <ion-toggle formControlName="catalogada"></ion-toggle>
+            </ion-item>
+
+            <ion-button expand="block" color="primary" type="submit" [disabled]="!formulario.valid" class="ion-margin-top">
+              Adicionar Criatura.
+            </ion-button>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <br>
+
+    <ion-button expand="block" (click)="listarCriaturas()" type="button">
+      {{ mostrar_lista_criaturas ? 'Ocultar' : 'Listar Criaturas' }}
+    </ion-button>
     <div *ngIf="mostrar_lista_criaturas == true">
       <div *ngFor="let Criaturas of listaCriaturas">
-        ID: {{ Criaturas.id }},
-        Nome: {{ Criaturas.nome }},
-        Tipo: {{ Criaturas.tipo }},
-        Nível de perigo: {{ Criaturas.nivelPerigo }},
-        Descrição: {{ Criaturas.descricao}}.
+        <ion-card>
+          <ion-card-content>
+            ID: {{ Criaturas.id }} <br>
+            Nome: {{ Criaturas.nome }} <br>
+            Tipo: {{ Criaturas.tipo }} <br>
+            Nível de Perigo: {{ Criaturas.nivelPerigo }} <br>
+            Catalogada: {{ Criaturas.catalogada ? 'Sim' : 'Não' }} <br>
+            Descrição: {{ Criaturas.descricao}} <br>
+            <ion-button fill="clear" color="danger" (click)="removerCriatura(Criaturas.id)" size="small">
+              Remover
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
       </div>
     </div>
+
     <br>
-    <button (click)="listarCatalogo()" type="button">Criaturas catalogadas.</button>
+
+    <ion-button expand="block" (click)="listarCatalogo()" type="button">
+      {{ mostrar_lista_catalogo ? 'Ocultar' : 'Criaturas Catalogadas' }}
+    </ion-button>
     <div *ngIf="mostrar_lista_catalogo == true">
-      Catalogadas:
-      <div *ngFor="let Criaturas of filtrarCriaturas(true)">
-        ID: {{ Criaturas.id }},
-        Nome: {{ Criaturas.nome }},
-      </div>
-      Não catalogadas:
-      <div *ngFor="let Criaturas of filtrarCriaturas(false)">
-        ID: {{ Criaturas.id }},
-        Nome: {{ Criaturas.nome }},
+      <div>
+        <h3>Catalogadas</h3>
+        <div *ngFor="let Criaturas of filtrarCriaturas(true)">
+          <ion-card>
+            <ion-card-content>
+              ID: {{ Criaturas.id }} | Nome: {{ Criaturas.nome }}
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <h3>Não Catalogadas</h3>
+        <div *ngFor="let Criaturas of filtrarCriaturas(false)">
+          <ion-card>
+            <ion-card-content>
+              ID: {{ Criaturas.id }} | Nome: {{ Criaturas.nome }}
+            </ion-card-content>
+          </ion-card>
+        </div>
       </div>
     </div>
-</div>
+  </div>
 </ion-content>
