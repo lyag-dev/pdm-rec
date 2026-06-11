@@ -48,11 +48,11 @@ export class HomePage {
   proximoId: number = 6;
 
   listaCriaturas: Criatura[] = [
-    { id: 1, nome: `Shukaku`, tipo: `Besta de cauda`, nivelPerigo: 7.9, catalogada: true, descricao: `Besta de uma cauda que controla a areia` },
-    { id: 2, nome: `Dio Drando`, tipo: `Vampiro da máscara de pedra`, nivelPerigo: 8.6, catalogada: false, descricao: `Vampiro com poder ancestral, pode infectar pessoas` },
-    { id: 3, nome: `Sanakan`, tipo: `Safe guard`, nivelPerigo: 6.8, catalogada: false, descricao: `Exemplar de espécie biónica que elimina humanos sem o "net terminal gene"` },
-    { id: 4, nome: `White Gauna`, tipo: `Gauna`, nivelPerigo: 9.9, catalogada: true, descricao: `Monstros capazes de absorver humanos, escalam de tamanho e perigo extremamente rápido` },
-    { id: 5, nome: `Gedou Mazou`, tipo: `Estátua demoniáca`, nivelPerigo: 7.1, catalogada: true, descricao: `Estátua do cadáver da jubi, pode ser controlado com o rinnegan` },
+    { id: 1, nome: `Shukaku`, tipo: `Besta de cauda`, nivelPerigo: 7.9, catalogada: true, descricao: `Besta de uma cauda que controla a areia`, imagem: `https://p.turbosquid.com/ts-thumb/RG/Z79Ae6/dzZN9M7A/shu/jpg/1578346607/1920x1080/fit_q87/5bc44630dd14011a2c7649c7a2fd68a8e8663aa9/shu.jpg` },
+    { id: 2, nome: `Dio Drando`, tipo: `Vampiro da máscara de pedra`, nivelPerigo: 8.6, catalogada: false, descricao: `Vampiro com poder ancestral, pode infectar pessoas`, imagem: `https://models.spriters-resource.com/media/preview_icons/346/349551.png?updated=1755514159` },
+    { id: 3, nome: `Sanakan`, tipo: `Safe guard`, nivelPerigo: 6.8, catalogada: false, descricao: `Exemplar de espécie biónica que elimina humanos sem o "net terminal gene"`, imagem: `https://cdn.myanimelist.net/images/characters/8/565110.jpg` },
+    { id: 4, nome: `White Gauna`, tipo: `Gauna`, nivelPerigo: 9.9, catalogada: true, descricao: `Monstros capazes de absorver humanos, escalam de tamanho e perigo extremamente rápido`, imagem: `https://pbs.twimg.com/media/E4IkSw7VcAQ7wti.jpg` },
+    { id: 5, nome: `Gedou Mazou`, tipo: `Estátua demoniáca`, nivelPerigo: 7.1, catalogada: true, descricao: `Estátua do cadáver da jubi, pode ser controlado com o rinnegan`, imagem: `https://static.wikia.nocookie.net/naruto/images/6/69/Ged%C5%8D_Maz%C5%8D_Nagato.png/revision/latest?cb=20170201051301&path-prefix=pt-br` },
   ];
 
   constructor(private fb: FormBuilder) {
@@ -61,6 +61,7 @@ export class HomePage {
       tipo: ['', [Validators.required, Validators.minLength(3)]],
       nivelPerigo: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
       descricao: ['', [Validators.required, Validators.minLength(10)]],
+      imagem: ['', [Validators.required]],
       catalogada: [false]
     });
   }
@@ -109,4 +110,5 @@ export type Criatura = {
   nivelPerigo: number;
   catalogada: boolean;
   descricao: string;
+  imagem: string;
 };

@@ -26,7 +26,7 @@
           <form [formGroup]="formulario" (ngSubmit)="adicionarCriatura()">
             
             <ion-item>
-              <ion-label position="stacked">Nome da Criatura:</ion-label>
+              <ion-label class="label-font" position="stacked">Nome da Criatura:</ion-label>
               <ion-input formControlName="nome" type="text"></ion-input>
             </ion-item>
             <div *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched" class="error-message">
@@ -34,7 +34,7 @@
             </div>
 
             <ion-item>
-              <ion-label position="stacked">Tipo:</ion-label>
+              <ion-label class="label-font" position="stacked">Tipo:</ion-label>
               <ion-input formControlName="tipo" type="text"></ion-input>
             </ion-item>
             <div *ngIf="formulario.get('tipo')?.invalid && formulario.get('tipo')?.touched" class="error-message">
@@ -42,7 +42,7 @@
             </div>
 
             <ion-item>
-              <ion-label position="stacked">Nível de Perigo (0-10):</ion-label>
+              <ion-label class="label-font" position="stacked">Nível de Perigo (0-10):</ion-label>
               <ion-input formControlName="nivelPerigo" type="number" min="0" max="10"></ion-input>
             </ion-item>
             <div *ngIf="formulario.get('nivelPerigo')?.invalid && formulario.get('nivelPerigo')?.touched" class="error-message">
@@ -50,7 +50,7 @@
             </div>
 
             <ion-item>
-              <ion-label position="stacked">Descrição:</ion-label>
+              <ion-label class="label-font" position="stacked">Descrição:</ion-label>
               <ion-input formControlName="descricao" type="text"></ion-input>
             </ion-item>
             <div *ngIf="formulario.get('descricao')?.invalid && formulario.get('descricao')?.touched" class="error-message">
@@ -58,7 +58,14 @@
             </div>
 
             <ion-item>
-              <ion-label position="stacked">Catalogada?</ion-label>
+              <ion-label class="label-font" position="stacked">Imagem (URL):</ion-label>
+              <ion-input formControlName="imagem" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="formulario.get('imagem')?.invalid && formulario.get('imagem')?.touched" class="error-message">
+            </div>
+
+            <ion-item>
+              <ion-label class="label-font" position="stacked">Catalogada?</ion-label>
               <ion-toggle slot="end" formControlName="catalogada"></ion-toggle>
             </ion-item>
 
@@ -85,6 +92,7 @@
             Nível de Perigo: {{ Criaturas.nivelPerigo }} <br>
             Catalogada: {{ Criaturas.catalogada ? 'Sim' : 'Não' }} <br>
             Descrição: {{ Criaturas.descricao}} <br>
+            <img src="{{Criaturas.imagem}}" alt="" srcset=""> <br>
             <ion-button fill="clear" color="danger" (click)="removerCriatura(Criaturas.id)" size="small">
               Remover
             </ion-button>

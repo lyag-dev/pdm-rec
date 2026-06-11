@@ -38,3 +38,15 @@
 .toolbar-title {
   text-align: center;
 }
+
+.label-font {
+    font-family: PxPlus IBM VGA8!important;
+}
+
+img {
+  max-width: 200px;
+  border-radius: 12px;
+  border: 1px solid;
+  border-color: bisque;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+}
